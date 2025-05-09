@@ -24,3 +24,9 @@ export function runMicrotask(fn) {
     }, 0);
   }
 }
+
+export function newHandler(constructor: Function, ...args: any[]) {
+  const obj = Object.create(constructor.prototype);
+  const result = constructor.apply(obj, args);
+  return typeof result === 'object' ? result : obj;
+}
