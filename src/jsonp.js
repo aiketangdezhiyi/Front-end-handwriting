@@ -1,11 +1,11 @@
 function jsonp(url, success) {
   // 请求地址 回调的函数名 成功的回调
-  const script = document.createElement("script");
-  const functionName = "cb" + Math.random().toString().substring(2); // 生成一个函数名
+  const script = document.createElement('script');
+  const functionName = 'cb' + Math.random().toString().substring(2); // 生成一个函数名
   window[functionName] = success; // 全局导入函数 等待执行
   let src = url;
 
-  if (src.includes("?")) {
+  if (src.includes('?')) {
     src += `&callback=${functionName}`;
   } else {
     src += `?callback=${functionName}`;

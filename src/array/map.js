@@ -1,6 +1,6 @@
 Array.prototype.myMap = function (func, This) {
   if (!Array.isArray(this)) {
-    throw new TypeError(this + " is not array");
+    throw new TypeError(this + ' is not array');
   }
   const res = [];
   let len = this.length;

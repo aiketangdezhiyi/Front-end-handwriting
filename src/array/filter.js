@@ -1,6 +1,6 @@
 Array.prototype.myFilter = function (func, This) {
   if (!Array.isArray(this)) {
-    throw new TypeError(this + " is not array");
+    throw new TypeError(this + ' is not array');
   }
   const arr = [];
   let len = this.length;

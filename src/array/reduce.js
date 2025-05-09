@@ -18,12 +18,12 @@ Array.prototype.myReduce = function (func, initState) {
 // test code
 const arr = [1, 2, 3];
 const res = arr.reduce((prev, cur, i, _this) => {
-  console.log("reduce", prev, cur, i, _this);
+  console.log('reduce', prev, cur, i, _this);
   return prev + cur;
 });
 
 const res1 = arr.myReduce((prev, cur, i, _this) => {
-  console.log("myReduce", prev, cur, i, _this);
+  console.log('myReduce', prev, cur, i, _this);
   return prev + cur;
 });
 

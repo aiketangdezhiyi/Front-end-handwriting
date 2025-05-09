@@ -1,6 +1,6 @@
 Array.prototype.myForEach = function (func, _this) {
   if (!Array.isArray(this)) {
-    throw new TypeError(this + " is not array");
+    throw new TypeError(this + ' is not array');
   }
   const arr = this;
   let len = arr.length;

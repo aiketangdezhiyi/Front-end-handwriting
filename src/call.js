@@ -1,9 +1,9 @@
 Function.prototype.myCall = function (_this, ...args) {
   const fn = this;
-  if (typeof _this !== "object") {
+  if (typeof _this !== 'object') {
     _this = new Object(_this);
   }
-  Object.defineProperty(_this, "_fn", {
+  Object.defineProperty(_this, '_fn', {
     enumerable: false,
     value: fn,
   });

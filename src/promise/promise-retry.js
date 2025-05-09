@@ -15,7 +15,7 @@ Promise.retry = function (fn, time, timeout) {
   });
   const timePro = new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject("timeout");
+      reject('timeout');
     }, timeout);
   });
   return Promise.race([retryPro, timePro]);

@@ -5,7 +5,7 @@
  * @returns
  */
 function deepClone(val, visited = new WeakMap()) {
-  if (typeof val !== "object") return val;
+  if (typeof val !== 'object') return val;
   if (visited.has(val)) return visited.get(val);
 
   const res = Array.isArray(val) ? [] : {};

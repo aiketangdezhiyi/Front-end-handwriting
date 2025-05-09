@@ -57,14 +57,14 @@ Promise.allSettled = function (proms) {
           (data) => {
             settledCount++;
             resolvedData[i] = {
-              state: "fullfilled",
+              state: 'fullfilled',
               data,
             };
           },
           (reason) => {
             settledCount++;
             resolvedData[i] = {
-              state: "rejected",
+              state: 'rejected',
               reason,
             };
           }

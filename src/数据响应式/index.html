@@ -1,116 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div id="first">1</div>
 
     <script>
-        let watcher = null;
+      let watcher = null;
 
-        class Schedule {
-            _task = new Set();
+      class Schedule {
+        _task = new Set();
 
-            push(watcher) {
-                this._task.add(watcher);
-            }
-
-            _run() {
-                const task = this._task;
-                this._task = new Set();
-                for (const watcher of task) {
-                    watcher.update();
-                }
-            }
-
-            nextTick() {
-                Promise.resolve().then(this._run.bind(this));
-            }
-
-        }
-        const schedule = new Schedule();
-        class Dep {
-            deps = [];
-            notify() {
-                const deps = this.deps;
-                this.deps = [];
-                for (let i = 0; i < deps.length; i++) {
-                    const watcher = deps[i];
-                    schedule.push(watcher);
-                }
-                schedule.nextTick();
-            }
-            depend() {
-                watcher && this.deps.push(watcher);
-            }
+        push(watcher) {
+          this._task.add(watcher);
         }
 
-        class Watcher {
-            constructor(data, prop, cb) {
-                this.data = data;
-                this.prop = prop;
-                this.cb = cb;
-                this.value = this.get();
-            }
-            get() {
-                watcher = this;
-                let value = this.data[this.prop];
-                watcher = undefined;
-                return value;
-            }
-            update() {
-                const oldValue = this.value;
-                this.value = this.get();
-                this.cb(this.value, oldValue);
-            }
-
+        _run() {
+          const task = this._task;
+          this._task = new Set();
+          for (const watcher of task) {
+            watcher.update();
+          }
         }
 
-
-
-
-        const data = { count: 1 };
-
-        function observer(obj) {
-            const vm = {};
-            for (const prop in obj) {
-                if (Object.hasOwnProperty.call(obj, prop)) {
-                    const dep = new Dep();
-                    Object.defineProperty(vm, prop, {
-                        get() {
-                            dep.depend();
-                            return data[prop];
-                        },
-                        set(val) {
-                            data[prop] = val;
-                            dep.notify();
-                        }
-                    })
-                }
-            }
-            return vm;
+        nextTick() {
+          Promise.resolve().then(this._run.bind(this));
         }
-        const observerData = observer(data);
-        const firstDOM = document.getElementById("first");
-        const oWatcher = new Watcher(observerData, "count", function (val, oldVal) {
-            console.log(val, oldVal);
-            firstDOM.innerHTML = val;
-        })
-        firstDOM.onclick = function () {
-            observerData.count++;
-            observerData.count++;
-            observerData.count++;
+      }
+      const schedule = new Schedule();
+      class Dep {
+        deps = [];
+        notify() {
+          const deps = this.deps;
+          this.deps = [];
+          for (let i = 0; i < deps.length; i++) {
+            const watcher = deps[i];
+            schedule.push(watcher);
+          }
+          schedule.nextTick();
         }
+        depend() {
+          watcher && this.deps.push(watcher);
+        }
+      }
 
+      class Watcher {
+        constructor(data, prop, cb) {
+          this.data = data;
+          this.prop = prop;
+          this.cb = cb;
+          this.value = this.get();
+        }
+        get() {
+          watcher = this;
+          let value = this.data[this.prop];
+          watcher = undefined;
+          return value;
+        }
+        update() {
+          const oldValue = this.value;
+          this.value = this.get();
+          this.cb(this.value, oldValue);
+        }
+      }
+
+      const data = { count: 1 };
+
+      function observer(obj) {
+        const vm = {};
+        for (const prop in obj) {
+          if (Object.hasOwnProperty.call(obj, prop)) {
+            const dep = new Dep();
+            Object.defineProperty(vm, prop, {
+              get() {
+                dep.depend();
+                return data[prop];
+              },
+              set(val) {
+                data[prop] = val;
+                dep.notify();
+              },
+            });
+          }
+        }
+        return vm;
+      }
+      const observerData = observer(data);
+      const firstDOM = document.getElementById('first');
+      const oWatcher = new Watcher(observerData, 'count', function (
+        val,
+        oldVal
+      ) {
+        console.log(val, oldVal);
+        firstDOM.innerHTML = val;
+      });
+      firstDOM.onclick = function () {
+        observerData.count++;
+        observerData.count++;
+        observerData.count++;
+      };
     </script>
-
-</body>
-
+  </body>
 </html>

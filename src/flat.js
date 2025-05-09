@@ -4,8 +4,8 @@
  */
 function flat(arr) {
   // JSON序列化有问题 请参考深度克隆 https://blog.csdn.net/Ares0412/article/details/127386317
-  const res = JSON.stringify(arr).replace(/[\[\]]/g, "");
-  return JSON.parse("[" + res + "]");
+  const res = JSON.stringify(arr).replace(/[\[\]]/g, '');
+  return JSON.parse('[' + res + ']');
 }
 
 /**

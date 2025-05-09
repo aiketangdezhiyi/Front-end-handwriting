@@ -1,0 +1,14 @@
+{
+  "name": "front-end-handwriting",
+  "version": "1.0.0",
+  "description": "前端常见的手写面试题：bind、call、apply、deepClone、Promise、debounce、curry、unqiue、flat and so on。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
+}

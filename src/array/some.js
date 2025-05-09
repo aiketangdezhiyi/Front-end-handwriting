@@ -1,6 +1,6 @@
 Array.prototype.mySome = function (func, This) {
   if (!Array.isArray(this)) {
-    throw new TypeError(this + " is not array");
+    throw new TypeError(this + ' is not array');
   }
   const arr = this;
   if (arr.length === 0) {

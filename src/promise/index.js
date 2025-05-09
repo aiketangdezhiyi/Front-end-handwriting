@@ -1,11 +1,11 @@
 function isPromise(obj) {
-  return typeof obj === "object" && typeof obj.then === "function";
+  return typeof obj === 'object' && typeof obj.then === 'function';
 }
 
 class MyPromise {
-  static PENDING = "pending";
-  static RESOLVE = "fullfilled";
-  static REJECT = "rejected";
+  static PENDING = 'pending';
+  static RESOLVE = 'fullfilled';
+  static REJECT = 'rejected';
 
   _runTaskQueue = [];
 
@@ -70,7 +70,7 @@ class MyPromise {
       this._runTaskQueue = [];
     };
 
-    if (typeof MutationObserver !== "undefined") {
+    if (typeof MutationObserver !== 'undefined') {
       let counter = 1;
       const observer = new MutationObserver(run);
       const textNode = document.createTextNode(String(counter));
@@ -86,19 +86,19 @@ class MyPromise {
         setTimeout(run, 0);
       };
     }
-    typeof timerFunc === "function" && timerFunc();
+    typeof timerFunc === 'function' && timerFunc();
   }
 
   then(onResolved, onRejected) {
     return new MyPromise((resolve, reject) => {
-      typeof onResolved === "function" &&
+      typeof onResolved === 'function' &&
         this._queue.push({
           resolve,
           reject,
           state: MyPromise.RESOLVE,
           cb: onResolved,
         });
-      typeof onRejected === "function" &&
+      typeof onRejected === 'function' &&
         this._queue.push({
           resolve,
           reject,
@@ -124,10 +124,10 @@ pro.then((data) => {
   console.log(data);
 });
 pro.then(() => {
-  console.log("promise");
+  console.log('promise');
 });
 
-console.log("script end");
+console.log('script end');
 
 // 1
 // 2
