@@ -92,10 +92,7 @@
       }
       const observerData = observer(data);
       const firstDOM = document.getElementById('first');
-      const oWatcher = new Watcher(observerData, 'count', function (
-        val,
-        oldVal
-      ) {
+      const oWatcher = new Watcher(observerData, 'count', function (val, oldVal) {
         console.log(val, oldVal);
         firstDOM.innerHTML = val;
       });

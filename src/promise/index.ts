@@ -4,10 +4,7 @@ enum PromiseStatus {
   REJECTED = 'rejected',
 }
 
-type PromiseExecutor<T> = (
-  resolve: (value: T) => void,
-  reject: (reason: any) => void
-) => void;
+type PromiseExecutor<T> = (resolve: (value: T) => void, reject: (reason: any) => void) => void;
 
 interface IPromiseObject {
   callback: Function;
@@ -101,13 +98,9 @@ export class MyPromise<T> {
     }
   }
 
-  public then(
-    onFullfilled?: (value: T) => any,
-    onRejected?: (reason: any) => any
-  ): MyPromise<any> {
+  public then(onFullfilled?: (value: T) => any, onRejected?: (reason: any) => any): MyPromise<any> {
     // 值穿透
-    const onFullfilledFn =
-      typeof onFullfilled === 'function' ? onFullfilled : (value: T) => value;
+    const onFullfilledFn = typeof onFullfilled === 'function' ? onFullfilled : (value: T) => value;
     const onRejectedFn =
       typeof onRejected === 'function'
         ? onRejected
